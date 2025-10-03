@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Translation Test - All Pages</title>
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+              rel="stylesheet">
+       <link rel="stylesheet" href="css/styles.css">
+       <style>
+              .test-container {
+                     max-width: 1000px;
+                     margin: 2rem auto;
+                     padding: 2rem;
+                     background: white;
+                     border-radius: 12px;
+                     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+              }
+
+              .page-link {
+                     display: inline-block;
+                     margin: 10px;
+                     padding: 12px 24px;
+                     background: linear-gradient(135deg, #0ea5a1, #013a63);
+                     color: white;
+                     text-decoration: none;
+                     border-radius: 8px;
+                     font-weight: 600;
+                     transition: transform 0.2s;
+              }
+
+              .page-link:hover {
+                     transform: translateY(-2px);
+              }
+
+              .status {
+                     padding: 10px;
+                     margin: 10px 0;
+                     border-radius: 8px;
+                     background: #f0f0f0;
+              }
+
+              .success {
+                     background: #d4edda;
+                     color: #155724;
+              }
+
+              .error {
+                     background: #f8d7da;
+                     color: #721c24;
+              }
+
+              .warning {
+                     background: #fff3cd;
+                     color: #856404;
+              }
+       </style>
+</head>
+
+<body>
+       <div class="test-container">
+              <h1>Translation System - All Pages Test</h1>
+
+              <!-- Language Controls -->
+              <div style="text-align: center; margin: 2rem 0;">
+                     <button class="page-link" id="langToggle">EN</button>
+                     <button class="page-link" id="langBtn" data-en="Change Language" data-ar="تغيير اللغة">Change
+                            Language</button>
+              </div>
+
+              <!-- Page Links -->
+              <div style="text-align: center; margin: 2rem 0;">
+                     <h2 data-en="Test All Pages" data-ar="اختبار جميع الصفحات">Test All Pages</h2>
+                     <a href="index.html" class="page-link" data-en="Homepage" data-ar="الصفحة الرئيسية">Homepage</a>
+                     <a href="family-ride.html" class="page-link" data-en="Family Ride" data-ar="رحلة عائلية">Family
+                            Ride</a>
+                     <a href="diving-snorkeling-adventure.html" class="page-link" data-en="Diving Adventure"
+                            data-ar="مغامرة الغوص">Diving Adventure</a>
+                     <a href="breakfast-lunch-at-sea.html" class="page-link" data-en="Sea Dining"
+                            data-ar="العشاء في البحر">Sea Dining</a>
+                     <a href="test-translations.html" class="page-link" data-en="Translation Test"
+                            data-ar="اختبار الترجمة">Translation Test</a>
+              </div>
+
+              <!-- Status Display -->
+              <div class="status" id="status">
+                     <h3 data-en="Current Status" data-ar="الحالة الحالية">Current Status</h3>
+                     <p data-en="Language: " data-ar="اللغة: ">Language: <span id="currentLang">en</span></p>
+                     <p data-en="Direction: " data-ar="الاتجاه: ">Direction: <span id="pageDirection">ltr</span></p>
+                     <p data-en="Translation Elements: " data-ar="عناصر الترجمة: ">Translation Elements: <span
+                                   id="elementCount">0</span></p>
+              </div>
+
+              <!-- Instructions -->
+              <div class="status warning">
+                     <h3 data-en="Instructions" data-ar="التعليمات">Instructions</h3>
+                     <ol>
+                            <li data-en="Click 'Change Language' to toggle between English and Arabic"
+                                   data-ar="انقر على 'تغيير اللغة' للتبديل بين الإنجليزية والعربية">Click 'Change
+                                   Language' to toggle between English and Arabic</li>
+                            <li data-en="Visit each page to test translations"
+                                   data-ar="قم بزيارة كل صفحة لاختبار الترجمات">Visit each page to test translations
+                            </li>
+                            <li data-en="Check that all text changes language"
+                                   data-ar="تأكد من أن جميع النصوص تغير اللغة">Check that all text changes language</li>
+                            <li data-en="Verify RTL layout for Arabic"
+                                   data-ar="تحقق من التخطيط من اليمين إلى اليسار للعربية">Verify RTL layout for Arabic
+                            </li>
+                     </ol>
+              </div>
+
+              <!-- Test Results -->
+              <div class="status" id="testResults">
+                     <h3 data-en="Test Results" data-ar="نتائج الاختبار">Test Results</h3>
+                     <div id="resultsList">
+                            <p data-en="No tests run yet" data-ar="لم يتم تشغيل اختبارات بعد">No tests run yet</p>
+                     </div>
+              </div>
+       </div>
+
+       <!-- JavaScript Files -->
+       <script src="js/translations.js"></script>
+       <script src="js/main.js"></script>
+
+       <script>
+              // Test functions
+              function runTests() {
+                     const results = [];
+
+                     // Test 1: Check if translation elements exist
+                     const elements = document.querySelectorAll('[data-en], [data-ar]');
+                     if (elements.length > 0) {
+                            results.push({ test: 'Translation Elements Found', status: 'success', message: `Found ${elements.length} elements` });
+                     } else {
+                            results.push({ test: 'Translation Elements Found', status: 'error', message: 'No translation elements found' });
+                     }
+
+                     // Test 2: Check language toggle functionality
+                     if (document.getElementById('langToggle') && document.getElementById('langBtn')) {
+                            results.push({ test: 'Language Toggle Buttons', status: 'success', message: 'Language toggle buttons found' });
+                     } else {
+                            results.push({ test: 'Language Toggle Buttons', status: 'error', message: 'Language toggle buttons not found' });
+                     }
+
+                     // Test 3: Check current language
+                     const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+                     results.push({ test: 'Current Language', status: 'success', message: `Language set to: ${currentLang}` });
+
+                     // Test 4: Check RTL support
+                     const direction = document.documentElement.getAttribute('dir');
+                     results.push({ test: 'RTL Support', status: 'success', message: `Page direction: ${direction}` });
+
+                     // Display results
+                     displayResults(results);
+              }
+
+              function displayResults(results) {
+                     const resultsList = document.getElementById('resultsList');
+                     resultsList.innerHTML = '';
+
+                     results.forEach(result => {
+                            const div = document.createElement('div');
+                            div.className = `status ${result.status}`;
+                            div.innerHTML = `<strong>${result.test}:</strong> ${result.message}`;
+                            resultsList.appendChild(div);
+                     });
+              }
+
+              function updateStatus() {
+                     document.getElementById('currentLang').textContent = currentLanguage;
+                     document.getElementById('pageDirection').textContent = document.documentElement.getAttribute('dir') || 'ltr';
+                     document.getElementById('elementCount').textContent = document.querySelectorAll('[data-en], [data-ar]').length;
+              }
+
+              // Run tests on page load
+              document.addEventListener('DOMContentLoaded', () => {
+                     setTimeout(() => {
+                            updateStatus();
+                            runTests();
+                     }, 100);
+              });
+
+              // Update status when language changes
+              const originalUpdateLanguage = updateLanguage;
+              updateLanguage = function () {
+                     originalUpdateLanguage();
+                     setTimeout(updateStatus, 50);
+              };
+       </script>
+</body>
+
+</html>
